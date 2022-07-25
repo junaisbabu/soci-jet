@@ -1,0 +1,51 @@
+.profile-container {
+  margin: 15px auto;
+  background-color: var(--card-color);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.profile-container .card {
+  background: none;
+  color: white;
+}
+
+.profile-container .sec-left {
+  display: grid;
+  place-content: center;
+}
+
+.profile-container .sec-left img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-container .name {
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.profile-container .sec-right {
+  line-height: 30px;
+}
+
+.profile-container .sec-right p {
+  margin: 0px;
+  font-weight: 400;
+}
+
+.profile-container .edit-profile-btn {
+  margin-left: 10px;
+}
+
+.profile-container .counter-container span {
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.profile-container .logout-btn {
+  display: block;
+  margin: 0 auto;
+}

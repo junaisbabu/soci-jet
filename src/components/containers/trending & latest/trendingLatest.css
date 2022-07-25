@@ -1,0 +1,21 @@
+.trendingLatest-container {
+  background-color: var(--card-color);
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.trendingLatest-container .nav {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 0px;
+}
+
+.trendingLatest-container .nav .bi-fire {
+  color: orange;
+}
+
+.trendingLatest-container .nav .bi-clock {
+  color: white;
+}

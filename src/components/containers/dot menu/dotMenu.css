@@ -1,0 +1,23 @@
+.dotMenu-container .card {
+    position: absolute;
+    top: 50px;
+    right: 3%;
+    background-color: var(--first-color);
+    padding: 0px;
+    width: 150px;
+}
+
+.dotMenu-container .btn {
+    display: block;
+    text-align: left;
+    padding: 8px;
+    color: #808080;
+}
+
+.dotMenu-container .btn:hover {
+    color: var(--second-color);
+}
+
+.dotMenu-container .btn-deletePost:hover {
+    color: red;
+}
