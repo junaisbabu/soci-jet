@@ -1,32 +1,46 @@
 .people-container {
   margin: 15px auto;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+  display: flex;
+  align-items: center;
 }
 .people-container .row {
   flex-wrap: nowrap;
+  overflow-y: hidden;
   overflow-x: scroll;
   padding-left: 1px;
   margin: 0px;
+  height: 190px;
+  display: flex;
+  align-items: center;
 }
 
 .people-container .row::-webkit-scrollbar {
   display: none;
 }
 
+@supports (scrollbar-color: red blue) {
+  .people-container .row {
+    scrollbar-width: none;
+  }
+}
+
 .people-container .card {
   text-align: center;
   justify-content: center;
   align-items: center;
-  width: 130px;
-  margin: 0px 3px 0px 0px;
+  width: 140px;
+  height: 180px;
+  margin: 0px 10px 0px 0px;
   background-color: var(--card-color);
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
 .people-container .card-title {
-  color: white;
+  color: var(--text-color);
   font-weight: 500;
+  font-size: 14px;
   margin: 0px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -38,18 +52,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px 0px 0px;
 }
 
 .people-container .card img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  margin-bottom: 3px;
 }
 
-.people-container .card-body button {
+.people-container .card-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.people-container .card-footer {
+  background-color: transparent;
+  border: none;
+}
+
+.people-container .card-footer .follow-btn {
   background: var(--third-color);
   background-color: transparent;
   color: var(--first-color);
@@ -57,4 +85,8 @@
   font-weight: 600;
   border-radius: 8px;
   border: 1px solid white;
+  padding: 3px 20px;
+  position: relative;
+  bottom: 10px;
+  cursor: pointer;
 }

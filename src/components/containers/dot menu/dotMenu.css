@@ -1,23 +1,42 @@
 .dotMenu-container .card {
-    position: absolute;
-    top: 50px;
-    right: 3%;
-    background-color: var(--first-color);
-    padding: 0px;
-    width: 150px;
+  position: absolute;
+  top: 50px;
+  right: 3%;
+  background-color: var(--first-color);
+  padding: 0px;
+  width: 150px;
+  z-index: 2;
+}
+
+.dotMenu-container .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
 .dotMenu-container .btn {
-    display: block;
-    text-align: left;
-    padding: 8px;
-    color: #808080;
+  display: block;
+  text-align: left;
+  padding: 8px;
+  color: var(--date-icon-color);
+  border: none;
 }
 
 .dotMenu-container .btn:hover {
-    color: var(--second-color);
+  color: var(--second-color);
 }
 
 .dotMenu-container .btn-deletePost:hover {
-    color: red;
+  color: red;
+}
+
+.edit-post {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }

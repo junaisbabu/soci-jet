@@ -6,11 +6,13 @@ import Header from "../header/Header";
 
 function Explore() {
   return (
-    <div className="explore-container">
+    <>
       <Header />
-      <People />
-      <FeedPost />
-    </div>
+      <div className="col-xs-10 col-sm-8 col-md-7 col-lg-5 mx-auto">
+        <People />
+        <FeedPost />
+      </div>
+    </>
   );
 }
 

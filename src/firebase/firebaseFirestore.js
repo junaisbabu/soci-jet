@@ -7,52 +7,63 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  setDoc,
+  serverTimestamp,
+  query,
+  orderBy,
 } from "firebase/firestore";
 
-const userCollectionRef = collection(db, "users");
 const postCollectionRef = collection(db, "posts");
+
 class firestoreSevice {
-  addNewUsers = (newUser) => {
-    return addDoc(userCollectionRef, newUser);
+  addDocument = (collectionName, data) => {
+    const collectionRef = collection(db, `${collectionName}`);
+    return addDoc(collectionRef, {
+      ...data,
+      timestamp: serverTimestamp(),
+    });
   };
 
-  updateUserDetails = (id, updateData) => {
-    const userDoc = doc(db, "users", id);
-
-    return updateDoc(userDoc, updateData);
+  setDocument = async (collectionRef, userId, data) => {
+    return await setDoc(doc(db, `${collectionRef}`, userId), data);
   };
 
-  getAllUsers = () => {
-    return getDocs(userCollectionRef);
+  updateDocument = (collectionRef, docId, updateData) => {
+    const docRef = doc(db, `${collectionRef}`, docId);
+
+    return updateDoc(docRef, updateData);
   };
 
-  getUser = (id) => {
-    const userDoc = doc(db, "users", id);
-    return getDoc(userDoc);
+  getDocument = (collectionRef, id) => {
+    const docRef = doc(db, `${collectionRef}`, id);
+    return getDoc(docRef);
   };
 
-  addPosts = (newPost) => {
-    return addDoc(postCollectionRef, newPost);
+  deleteDocument = (collectionRef, id) => {
+    const docRef = doc(db, `${collectionRef}`, id);
+    return deleteDoc(docRef);
   };
 
-  // Implement firebase function
-  getAllPosts = () => {
-    return getDocs(postCollectionRef);
-  };
-
-  deletePost = (id) => {
-    const postDoc = doc(db, "posts", id);
-    return deleteDoc(postDoc);
+  getDocuments = (collectionName) => {
+    const collectionRef = collection(db, `${collectionName}`);
+    return getDocs(collectionRef);
   };
 
   // Get all Posts When Add new post
-  getPosts = async () => {
-    const snapshot = await this.getAllPosts();
+  getPostsQuery = async () => {
 
-    const posts = await snapshot.docs.map((doc) => ({ ...doc.data(), docId: doc.id }));
-    console.log('posts firebase: ', posts);
-    return posts;
+    const q = await query(postCollectionRef, orderBy("timestamp", "desc"));
+
+    return q;
   };
+
+  getQuery = async (collectionName) => {
+    const collectionRef = collection(db, `${collectionName}`);
+    const q = await query(collectionRef);
+
+    return q;
+  }
+
 }
 
 export default new firestoreSevice();

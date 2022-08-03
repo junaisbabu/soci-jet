@@ -7,7 +7,7 @@
 
 .profile-container .card {
   background: none;
-  color: white;
+  color: var(--text-color);
 }
 
 .profile-container .sec-left {
@@ -28,7 +28,7 @@
 }
 
 .profile-container .sec-right {
-  line-height: 30px;
+  line-height: 35px;
 }
 
 .profile-container .sec-right p {
@@ -48,4 +48,8 @@
 .profile-container .logout-btn {
   display: block;
   margin: 0 auto;
+}
+
+.profile-container .website-link {
+  color: var(--second-color);
 }

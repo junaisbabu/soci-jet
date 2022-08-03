@@ -1,18 +1,33 @@
 import React from "react";
+import { RiHeartPulseFill, RiHomeHeartFill } from "react-icons/ri";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
 import "./postsBookmarkedActivities.css";
 
-function PostsBookMarkedActivities() {
+function PostsBookMarkedActivities({ tab, setTab, currentUser, profileid }) {
   return (
-    <div className="postBookmarkActivities-container col-xs-10 col-sm-8 col-md-7 col-lg-5">
-      <section className="posts">
-        <span><i class="bi bi-house-heart"></i> POSTS</span>
-      </section>
-      <section className="bookmarked">
-        <span><i class="bi bi-bookmark-star"></i> BOOKMARKED</span>
-      </section>
-      <section className="activities">
-        <span><i class="bi bi-heart-pulse"></i> ACTIVITIES</span>
-      </section>
+    <div className="postBookmarkActivities-container">
+      <span
+        className={tab === "posts" && "clicked"}
+        onClick={() => setTab("posts")}
+      >
+        <RiHomeHeartFill className="icon" /> POSTS
+      </span>
+      {profileid === currentUser && (
+        <span
+          className={tab === "bookmarks" && "clicked"}
+          onClick={() => setTab("bookmarks")}
+        >
+          <BsFillBookmarkStarFill className="icon" />
+          BOOKMARKED
+        </span>
+      )}
+      <span
+        className={tab === "activities" && "clicked"}
+        onClick={() => setTab("activities")}
+      >
+        <RiHeartPulseFill className="icon" />
+        ACTIVITIES
+      </span>
     </div>
   );
 }

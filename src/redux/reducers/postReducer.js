@@ -4,7 +4,7 @@ const initialState = [];
 
 export const postReducer = (state = initialState, { type, payLoad }) => {
   switch (type) {
-    case ActionTypes.ADD_NEW_POST:
+    case ActionTypes.ADD_POSTS:
       const newArr = payLoad;
       return newArr;
 

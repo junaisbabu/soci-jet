@@ -12,10 +12,14 @@
   padding: 10px 0px;
 }
 
-.trendingLatest-container .nav .bi-fire {
-  color: orange;
+
+.nav .nav-item {
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
-.trendingLatest-container .nav .bi-clock {
-  color: white;
+.nav .clicked {
+  color: var(--second-color);
 }

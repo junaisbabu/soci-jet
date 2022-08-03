@@ -1,8 +1,9 @@
-body {
-  background: #222D32;
-  font-family: 'Roboto', sans-serif;
+.app {
+  background-color: var(--body-color);
+  min-height: 100vh;
+  max-height: auto;
+  transition: all .5s;
+  padding-bottom: 30px;
 }
 
-.app {
-  
-}
+

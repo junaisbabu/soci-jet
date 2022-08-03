@@ -5,10 +5,30 @@
   margin: 15px auto;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: relative;
+}
+
+.createPost-container .spinner-body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.createPost-container .spinner-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .createPost-container .title-container .title {
-  color: white;
+  color: var(--text-color);
   margin: 0;
   font-size: 24px;
   font-weight: 500;
@@ -50,7 +70,7 @@
 
 .createPost-container .form-control {
   background-color: transparent;
-  color: white;
+  color: var(--text-color);
   border: none;
   outline: none;
   box-shadow: none;
@@ -59,7 +79,7 @@
 .createPost-container .form-control:focus {
   background-color: transparent;
   border: none;
-  color: white;
+  color: var(--text-color);
 }
 
 .photo-emojis-btn-container {
@@ -71,15 +91,20 @@
   margin-right: 5px;
 }
 
-.photo-emojis-btn-container .btn {
-  background-color: var(--first-color);
-  color: white;
-  padding: 10px 15px;
+.photo-emojis-btn-container .photo-emoji-btn {
+  background-color: var(--photo-emojis-btn-color);
+  color: var(--text-color);
+  padding: 5px 15px;
   margin: 5px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.photo-emojis-btn-container .photo-emoji-btn:hover {
+  background: var(--third-color);
 }
 
 .createPost-container .post-btn {
@@ -88,14 +113,32 @@
   margin: 0 auto;
   font-size: 20px;
   font-weight: 600;
-  color: var(--first-color);
+  color: var(--text-color);
+  border: none;
+  padding: 5px 0;
+  border-radius: 5px;
 }
 
-.createPost-container .photo-gif-btn {
+.createPost-container .post-btn:hover {
+  background: var(--third-color);
+  border: none;
+  outline: none;
+}
+
+.createPost-container .post-btn:disabled {
+  background: var(--post-btn-color);
+  color: black;
+}
+
+.createPost-container .post-btn:disabled:hover {
+  background: #e1e1e1;
+}
+
+.createPost-container .photo-emoji-btn {
   position: relative;
 }
 
-.createPost-container .photo-gif-btn .file-input {
+.createPost-container .photo-emoji-btn .file-input {
   position: absolute;
   left: 0;
   width: 105px;
@@ -104,12 +147,22 @@
 
 .createPost-container .file-container {
   width: 100%;
-  height: 350px;
+  /* height: 350px; */
   margin-top: 15px;
 }
 
 .createPost-container .file-container .selected-file {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   object-fit: contain;
+}
+
+.createPost-container .btn-close {
+  position: absolute;
+  right: 30px;
+  top: 140px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 25px;
 }

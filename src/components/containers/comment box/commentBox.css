@@ -1,0 +1,76 @@
+.commentBox-container * {
+  padding: 0;
+  margin: 0;
+}
+
+.commentBox-container .row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.commentBox-container .sec-left {
+  padding: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.commentBox-container .sec-right {
+  display: flex;
+  justify-content: end;
+  padding: 0;
+}
+
+.commentBox-container .sec .avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.commentBox-container .msg-box {
+  padding: 0px 20px;
+}
+
+.commentBox-container .msg-text {
+  color: var(--date-icon-color);
+  font-size: 18px;
+  margin: 5px 3px;
+}
+
+.commentBox-container .icon {
+  margin-right: 10px;
+}
+
+.commentBox-container .like-reply {
+  font-size: 16px;
+  color: var(--second-color);
+}
+
+.commentBox-container .reply-sec {
+  margin: 10px 0px 10px 25px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.commentBox-container .reply-given {
+  color: var(--date-icon-color);
+}
+
+.commentBox-container .enter-comment {
+  background-color: var(--body-color);
+  outline: none;
+  border: 1px solid var(--date-icon-color);
+}
+
+.commentBox-container .input-group .btn {
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  color: var(--text-color);
+}
+
+.commentBox-container .input-group .btn:hover {
+  background: linear-gradient(to left, #56ccf2, #2f80ed);
+}

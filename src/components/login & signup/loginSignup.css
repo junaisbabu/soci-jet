@@ -1,11 +1,6 @@
 .loginSignup-container {
     width: 100vw;
-    height: 100vh;
-}
-
-.loginSignup-container .row {
-    /* width: 80%; */
-    height: 100%;
+    height: 85vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,10 +8,11 @@
 
 
 .login-box {
-    margin-top: 75px;
+    padding: 0px 30px;
     height: auto;
     background: #1A2226;
     text-align: center;
+    border-radius: 15px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
@@ -30,11 +26,9 @@
 }
 
 .login-title {
-    margin-top: 15px;
     text-align: center;
     font-size: 30px;
     letter-spacing: 2px;
-    margin-top: 15px;
     font-weight: bold;
     color: #ECF0F5;
 }
@@ -103,14 +97,19 @@ input:focus {
     right: 0px;
 }
 
-.login-btm {
-    float: left;
-}
 
-.login-button {
+/* .login-button {
     padding-right: 0px;
     text-align: right;
     margin-bottom: 25px;
+} */
+
+.login-box .loginbttm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    color: #ffffff;
 }
 
 .login-text {
@@ -119,11 +118,13 @@ input:focus {
     color: #A2A4A4;
 }
 
-.loginbttm {
-    padding: 0px;
-}
 
 .loginbttm .btn {
     border: 3px solid #0DB8DE ;
     color: white;
+}
+
+.loginbttm .link {
+    display: inline;
+    text-decoration: none;
 }

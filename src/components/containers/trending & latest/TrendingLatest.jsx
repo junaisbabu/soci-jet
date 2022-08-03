@@ -1,16 +1,35 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import './trendingLatest.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./trendingLatest.css";
+import { HiClock } from "react-icons/hi";
+import { FaFireAlt } from "react-icons/fa";
 
-function TrendingLatest() {
+function TrendingLatest({ setTrendLatest, trendLatest }) {
+  const handleTrend = () => {
+    setTrendLatest("trend");
+  };
+
+  const handleLatest = () => {
+    setTrendLatest("latest");
+  };
   return (
-    <div className='trendingLatest-container col-xs-10 col-sm-8 col-md-7 col-lg-5'>
-      <ul className='nav'>
-        <li className='nav-item'><i class="bi bi-fire"></i> <NavLink to='/trending'>Trending</NavLink></li>
-        <li className='nav-item'><i class="bi bi-clock"></i><NavLink to='/latest'>Latest</NavLink></li>
-        </ul>
+    <div className="trendingLatest-container">
+      <ul className="nav">
+        <li
+          className={trendLatest === "trend" ? "clicked nav-item" : "nav-item"}
+          onClick={handleTrend}
+        >
+          <FaFireAlt /> Trending
+        </li>
+        <li
+          className={trendLatest === "latest" ? "clicked nav-item" : "nav-item"}
+          onClick={handleLatest}
+        >
+          <HiClock /> Latest
+        </li>
+      </ul>
     </div>
-  )
+  );
 }
 
-export default TrendingLatest
+export default TrendingLatest;

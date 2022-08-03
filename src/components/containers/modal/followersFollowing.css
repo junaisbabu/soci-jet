@@ -1,0 +1,30 @@
+.followersFollowing-modal {
+    padding: 0;
+}
+.followersFollowing-modal .modal-body {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.followersFollowing-modal .modal-body::-webkit-scrollbar {
+    display: none;
+}
+
+.followersFollowing-modal .list-item {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin: 5px 0;
+}
+
+.followersFollowing-modal .list-item .avatar {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.followersFollowing-modal .list-item .name {
+    font-size: large;
+}

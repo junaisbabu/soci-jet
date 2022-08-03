@@ -5,9 +5,10 @@ import { onAuthStateChanged } from "firebase/auth";
 // import { auth } from "../../firebase/firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuth } from "../../redux/actions/Actions";
-import { useNavigate } from "react-router-dom";
-import firestoreUserSevice from "../../firebase/firebaseFirestore";
+import { Link, useNavigate } from "react-router-dom";
+import firestoreSevice from "../../firebase/firebaseFirestore";
 import { getAuth, updateProfile } from "firebase/auth";
+import Nav from "./Nav";
 
 const auth = getAuth();
 
@@ -26,34 +27,39 @@ function Signup() {
     setErr("");
 
     try {
-      await signUp(email, password).then((result) => {
-        let newUser = {
+      await signUp(email, password).then(async (result) => {
+        await updateProfile(auth.currentUser, {
+          displayName: firstName + " " + lastName,
+          photoURL:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqVei_YzwR4hisFo7RAtfoHDZh4QQMd807Zzg1KzhrMMy7p9AQgz04QLMcCW-QEf6JXT8&usqp=CAU",
+        });
+        let userData = {
           id: result.user.uid,
-          name: firstName + " " + lastName,
+          name: auth.currentUser.displayName,
           email: email,
+          avatar: auth.currentUser.photoURL,
+          username: firstName,
+          bio: "",
+          link: "",
         };
 
-        firestoreUserSevice.addNewUsers(newUser);
+        await firestoreSevice.updateDocument(
+          "currentUser",
+          "0RPIcmA7A3sF0flPTswX",
+          userData
+        );
+        await firestoreSevice.setDocument("users", result.user.uid, userData);
       });
-      updateProfile(auth.currentUser, {
-        displayName: firstName + " " + lastName,
-        photoURL:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqVei_YzwR4hisFo7RAtfoHDZh4QQMd807Zzg1KzhrMMy7p9AQgz04QLMcCW-QEf6JXT8&usqp=CAU",
-      })
-        .then(() => {
-          console.log("Profile updated");
-        })
-        .catch((error) => {
-          console.log("error: ", error.message);
-        });
+
       navigate("/login");
     } catch (err) {
       setErr(err.message);
     }
   };
   return (
-    <div className="loginSignup-container container">
-      <div className="row">
+    <>
+      <Nav />
+      <div className="loginSignup-container container">
         <div className="col-lg-6 col-md-8 login-box">
           <div className="col-lg-12 login-key">
             <i className="bi bi-key"></i>
@@ -71,6 +77,7 @@ function Signup() {
                     <input
                       type="text"
                       class="form-control shadow-none"
+                      required
                       onChange={(event) => setFirstName(event.target.value)}
                     />
                   </div>
@@ -89,6 +96,7 @@ function Signup() {
                   <input
                     type="email"
                     className="form-control shadow-none"
+                    required
                     onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
@@ -97,23 +105,28 @@ function Signup() {
                   <input
                     type="password"
                     className="form-control shadow-none"
+                    required
                     onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
 
                 <div className="col-lg-12 loginbttm">
-                  <div className="col-lg-12 login-btm login-button">
-                    <button type="submit" className="btn btn-outline">
-                      SIGN UP
-                    </button>
-                  </div>
+                  <span>
+                    Already having an account?{" "}
+                    <Link to="/login" className="link">
+                      Sign in
+                    </Link>
+                  </span>
+                  <button type="submit" className="btn btn-outline">
+                    SIGN UP
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

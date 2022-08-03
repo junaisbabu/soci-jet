@@ -1,12 +1,12 @@
-import React from 'react'
-import Explore from '../components/containers/explore/Explore'
+import React from "react";
+import Explore from "../components/containers/explore/Explore";
 
 function ExplorePage() {
   return (
     <>
-        <Explore />
+      <Explore />
     </>
-  )
+  );
 }
 
-export default ExplorePage
+export default ExplorePage;

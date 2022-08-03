@@ -1,14 +1,15 @@
-import { ActionTypes } from "../constants/actionTypes"
+import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
-    users: '',
-}
+  users: "",
+};
 
-export const userReducer = (state = initialState, {type, payLoad}) => {
-    switch(type) {
-        case ActionTypes.ADD_NEW_USER:
-            return {...state, users: payLoad}
+export const userReducer = (state = initialState, { type, payLoad }) => {
+  switch (type) {
+    case ActionTypes.ADD_PEOPLE:
+      return { ...state, users: payLoad };
 
-        default: return state;
-    }
-}
+    default:
+      return state;
+  }
+};
