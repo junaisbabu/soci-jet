@@ -1,33 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import "./dotMenu.css";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
-import { useDispatch, useSelector } from "react-redux";
+import firestoreSevice from "../../firebase/firebaseFirestore";
+import { useSelector } from "react-redux";
 import UpdatedPost from "../modal/UpdatePost";
 
 const bookmarks = [];
 
-const useClickOutsideDot = (handler) => {
-  const dotMenuRef = useRef();
-
-  useEffect(() => {
-    const maybeHandler = (event) => {
-      if (!dotMenuRef.current.contains(event.target)) {
-        handler();
-      }
-    };
-
-    document.addEventListener("mousedown", maybeHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", maybeHandler);
-    };
-  });
-
-  return dotMenuRef;
-};
-
 function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
-  const dispatch = useDispatch();
+
   const currentUser = useSelector((state) => state.loggedUser.currentUser);
   const [value, setValue] = useState("");
   const [isEditClick, setIsEditClick] = useState(false);
@@ -38,8 +18,8 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
 
   const handleEdit = async (docId) => {
     const snapshot = await firestoreSevice.getDocument("posts", docId);
-    const { text, url } = snapshot.data();
-    setValue({ text, url });
+    const { text, file } = snapshot.data();
+    setValue({ text, file });
     setIsEditClick(true);
   };
 
@@ -53,11 +33,6 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
     });
   };
 
-  // let dotMenuElement = useClickOutsideDot(() => {
-  //   setIsDotClicked(false);
-  //   setIsEditClick(false);
-  // });
-
   return (
     <>
       {isEditClick && (
@@ -65,7 +40,9 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
           <UpdatedPost
             value={value}
             docId={docId}
+            setIsDotClicked={setIsDotClicked}
             setIsEditClick={setIsEditClick}
+            isEditClick={isEditClick}
             show={isEditClick}
             onHide={() => setIsEditClick(false)}
           />
@@ -80,28 +57,32 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
               setIsDotClicked(false);
             }}
           ></div>
-          <div className="card">
+          <div className="card p-1">
             <button
               className="btn btn-savePost btn-sm "
               onClick={() => handleBookmark(post)}
             >
               <i className="bi bi-bookmark"></i> Save post
             </button>
-            <button
-              className="btn btn-editPost btn-sm "
-              onClick={() => handleEdit(docId)}
-            >
-              <i className="bi bi-pencil-square"></i> Edit post
-            </button>
+            {currentUser.id === post.userId && (
+              <>
+                <button
+                  className="btn btn-editPost btn-sm "
+                  onClick={() => handleEdit(docId)}
+                >
+                  <i className="bi bi-pencil-square"></i> Edit post
+                </button>
 
-            <button
-              className="btn btn-deletePost btn-sm "
-              onClick={() => {
-                deleteHandler(docId);
-              }}
-            >
-              <i className="bi bi-trash"></i> Delete post
-            </button>
+                <button
+                  className="btn btn-deletePost btn-sm "
+                  onClick={() => {
+                    deleteHandler(docId);
+                  }}
+                >
+                  <i className="bi bi-trash"></i> Delete post
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

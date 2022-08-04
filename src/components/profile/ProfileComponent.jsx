@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { userSignOut } from "../../../firebase/firebaseAuth";
+import { userSignOut } from "../../firebase/firebaseAuth";
 import EditProfile from "../modal/EditProfile";
 import Followers from "../followers following/Followers";
 import Following from "../followers following/Following";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { onAuth } from "../../../redux/actions/Actions";
+import { onAuth } from "../../redux/actions/Actions";
 
 function ProfileComponent({ user, setUser, currentUser }) {
   const dispatch = useDispatch();
@@ -14,7 +14,6 @@ function ProfileComponent({ user, setUser, currentUser }) {
   const [followersModal, setFollowersModal] = useState(false);
   const [followingModal, setFollowingModal] = useState(false);
   const [editUser, setEditUser] = useState(false);
-
 
   const posts = useSelector((state) => state.addedPosts);
 
@@ -87,7 +86,7 @@ function ProfileComponent({ user, setUser, currentUser }) {
           </section>
           <section className="sec-right">
             <div className="d-flex align-items-center">
-              <h4 className="name">{user.name}</h4>
+              <h4 className="name m-0">{user.name}</h4>
               {currentUser !== user.id ? (
                 <button
                   className="edit-profile-btn btn btn-sm btn-outline-primary"

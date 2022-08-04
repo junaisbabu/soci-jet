@@ -1,5 +1,5 @@
 import React from "react";
-import SinglePost from "../components/containers/feed post/SinglePost";
+import SinglePost from "../components/feed post/SinglePost";
 
 function SinglePostPage() {
   return (

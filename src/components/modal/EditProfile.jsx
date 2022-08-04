@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import "./editProfile.css";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
-import { useDispatch, useSelector } from "react-redux";
-import { onAuth } from "../../../redux/actions/Actions";
-import firebaseStorageService from "../../../firebase/firebaseStorage";
+import firestoreSevice from "../../firebase/firebaseFirestore";
+import { useSelector } from "react-redux";
+import firebaseStorageService from "../../firebase/firebaseStorage";
 import Modal from "react-bootstrap/Modal";
 
 function EditProfile(props) {
@@ -12,7 +11,6 @@ function EditProfile(props) {
   const setUser = props.setUser;
 
   const user = useSelector((state) => state.loggedUser.currentUser);
-  const dispatch = useDispatch();
 
   const [changeAvatar, setChangeAvatar] = useState(null);
   const [updateName, setUpdateName] = useState(user.name);
@@ -65,7 +63,7 @@ function EditProfile(props) {
                     type="file"
                     onChange={(e) => setChangeAvatar(e.target.files[0])}
                   />
-                  <i class="bi bi-camera-fill"></i>
+                  <i className="bi bi-camera-fill"></i>
                   <img
                     src={
                       changeAvatar
@@ -73,7 +71,7 @@ function EditProfile(props) {
                         : user.avatar
                     }
                     className="upload-avatar"
-                    alt="..."
+                    alt={user.name}
                   />
                 </div>
               </section>

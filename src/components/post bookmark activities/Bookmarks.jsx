@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Post from "../feed post/Post";
 import "../feed post/feedPost.css";
 
-function Bookmarks({ currentUserId }) {
+function Bookmarks({ currentUserId, styles }) {
   const bookmarks = useSelector((state) => state.bookmarks);
 
   const getBookmarks = () => {
@@ -21,7 +21,7 @@ function Bookmarks({ currentUserId }) {
     <div className="feedPost-container">
       {bookmark &&
         bookmark.map((post) => {
-          return <Post post={post} />;
+          return <Post post={post} styles={styles} />;
         })}
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
+import firestoreSevice from "../../firebase/firebaseFirestore";
 import FollowersFollowing from "../modal/FollowersFollowing";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";

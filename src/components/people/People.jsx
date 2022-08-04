@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./people.css";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
+import firestoreSevice from "../../firebase/firebaseFirestore";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function People() {
   const [fUsers, setFUsers] = useState([]);
-  const [follower, setFollower] = useState([]);
+  // const [follower, setFollower] = useState([]);
   const users = useSelector((state) => state.addedUsers.users);
   const currentUser = useSelector((state) => state.loggedUser.currentUser);
   const following = useSelector((state) => state.followingUsers);
-  const followers = useSelector((state) => state.followers);
+  // const followers = useSelector((state) => state.followers);
   const navigate = useNavigate();
 
   const navigateProfile = (userId) => {

@@ -1,20 +1,27 @@
 .emojibox-container {
   z-index: 1;
-  position: fixed;
-  left: 38%;
-  top: 28%;
+  position: absolute;
+  left: 163px;
+  top: 140px;
 }
 
-.emojibox-container .btn-close {
-  z-index: 2;
-  font-size: 20px;
-  background-color: orangered;
-  position: relative;
-  left: 100%;
-}
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 450px) {
   .emojibox-container {
-    display: none;
+    /* display: none; */
+    left: 20%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .emojibox-container {
+    /* display: none; */
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .emojibox-container {
+    /* display: none; */
+    left: 2%;
   }
 }

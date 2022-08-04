@@ -63,3 +63,16 @@
   object-fit: cover;
   margin: 0 5px;
 }
+
+
+@media screen and (max-width: 450px) {
+  .navbar-brand .soci-jet {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .navbar-brand > i {
+    display: none;
+  }
+}

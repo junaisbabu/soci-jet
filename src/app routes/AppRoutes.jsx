@@ -1,6 +1,6 @@
 import { onSnapshot } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import ExplorePage from "../pages/ExplorePage";
 import HomePage from "../pages/HomePage";
@@ -11,12 +11,10 @@ import SinglePostPage from "../pages/SinglePostPage";
 import { ActionTypes } from "../redux/constants/actionTypes";
 import ProtectedRoute from "./ProtectedRoute";
 import firestoreSevice from "../firebase/firebaseFirestore";
-import { LoadingContext } from "../App";
+import PreventBack from "./PreventBack";
 
 function AppRoutes() {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.loggedUser.currentUser);
-  const { load, setLoad } = useContext(LoadingContext);
 
   const queryPeople = async () => {
     const q = await firestoreSevice.getQuery("users");
@@ -98,14 +96,28 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
+      <Route
+        path="/login"
+        element={
+          <PreventBack>
+            <LoginPage />
+          </PreventBack>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <PreventBack>
+            <SignupPage />
+          </PreventBack>
+        }
+      />
       <Route
         path="/"
         element={
-          // <ProtectedRoute>
-          <HomePage />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
         }
       />
       <Route path="/profile/:profileid" element={<ProfilePage />} />

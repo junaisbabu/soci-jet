@@ -4,7 +4,6 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
 
 function CommentBox({ styles, post }) {
-
   return (
     <div className="commentBox-container">
       <div className="card" style={styles.border}>
@@ -27,11 +26,7 @@ function CommentBox({ styles, post }) {
             <AiOutlineLike className="icon" /> <span>Reply</span>
           </div>
           <div className="reply-sec sec">
-            <img
-              className="avatar"
-              src={post.userAvatar}
-              alt="user avatar"
-            />
+            <img className="avatar" src={post.userAvatar} alt="user avatar" />
             <div>
               <h6 className="">{post.name}</h6>
               <p className="reply-given">Thanks 😍</p>

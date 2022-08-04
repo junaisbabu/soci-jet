@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
+import firestoreSevice from "../../firebase/firebaseFirestore";
 import Header from "../header/Header";
 import "./feedPost.css";
 import CommentBox from "../comment box/CommentBox";
-import Loading from "../../loading spinner/Loading";
+import Loading from "../loading spinner/Loading";
 
 function SinglePost() {
   const [post, setPost] = useState();

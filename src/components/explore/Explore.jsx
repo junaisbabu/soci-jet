@@ -1,6 +1,6 @@
 import React from "react";
 import "./explore.css";
-import People from "../../containers/people/People";
+import People from "../people/People";
 import FeedPost from "../feed post/FeedPost";
 import Header from "../header/Header";
 

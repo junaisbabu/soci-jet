@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import "./feedPost.css";
 import { useSelector } from "react-redux";
 import Post from "./Post";
+import "./feedPost.css";
 
 function FeedPost() {
   const posts = useSelector((state) => state.addedPosts);

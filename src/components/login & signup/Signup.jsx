@@ -51,7 +51,7 @@ function Signup() {
         await firestoreSevice.setDocument("users", result.user.uid, userData);
       });
 
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       setErr(err.message);
     }

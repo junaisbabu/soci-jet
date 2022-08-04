@@ -1,28 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./createPost.css";
-import File_Upload from "../../../images/icons/file_upload.png";
-import Emoji from "../../../images/icons/emoji.png";
-import { useSelector, useDispatch } from "react-redux";
-import firebaseStorageService from "../../../firebase/firebaseStorage";
-import firebaseFirestore from "../../../firebase/firebaseFirestore";
-import firestoreSevice from "../../../firebase/firebaseFirestore";
-import { ActionTypes } from "../../../redux/constants/actionTypes";
-import EmojiBox from "../../emoji/EmojiBox";
-import { LoadingContext } from "../../../App";
-import Spinner from "../../loading spinner/Spinner";
+import File_Upload from "../../images/icons/file_upload.png";
+import Emoji from "../../images/icons/emoji.png";
+import { useSelector } from "react-redux";
+import firebaseStorageService from "../../firebase/firebaseStorage";
+import firestoreSevice from "../../firebase/firebaseFirestore";
+import EmojiBox from "../emoji/EmojiBox";
+import { LoadingContext } from "../../App";
+import Spinner from "../loading spinner/Spinner";
 
-function CreatePost({ value, docId, setIsEditClick }) {
-  const user = useSelector((state) => state.loggedUser.currentUser);
-  const users = useSelector((state) => state.addedUsers.users);
-  const dispatch = useDispatch();
+function CreatePost({
+  value,
+  docId,
+  isEditClick,
+  setIsEditClick,
+  setIsDotClicked,
+}) {
+  const currentUser = useSelector((state) => state.loggedUser.currentUser);
   const { load, setLoad } = useContext(LoadingContext);
 
   const editText = value.text;
-  const editPhoto = value.url;
+  const editFile = value.file;
 
   const [text, setText] = useState(editText);
   const [image, setImage] = useState(null);
-
+  const [editPhoto, setEditPhoto] = useState(editFile);
 
   const [emojiClick, setEmojiClick] = useState(false);
 
@@ -34,9 +36,9 @@ function CreatePost({ value, docId, setIsEditClick }) {
     const date = new Date();
     const url = await firebaseStorageService.addPost(image);
     let newPost = {
-      userId: user.id,
-      name: user.name,
-      userAvatar: user.avatar,
+      userId: currentUser.id,
+      name: currentUser.name,
+      userAvatar: currentUser.avatar,
       text: text,
       file: url,
       createdAt: date.toDateString(),
@@ -49,6 +51,7 @@ function CreatePost({ value, docId, setIsEditClick }) {
   };
 
   const handleUpdatePost = async () => {
+    setLoad(true);
     const url = await firebaseStorageService.addPost(image);
     let updatedPost = {
       text: text,
@@ -57,7 +60,9 @@ function CreatePost({ value, docId, setIsEditClick }) {
 
     firestoreSevice.updateDocument("posts", docId, updatedPost);
 
+    setLoad(false);
     setIsEditClick(false);
+    setIsDotClicked(false);
   };
 
   return (
@@ -71,15 +76,13 @@ function CreatePost({ value, docId, setIsEditClick }) {
           </div>
         )}
         <div className="title-container">
-          <h1 className="title">
-            {editText || editPhoto ? "Edit Post" : "Create Post"}
-          </h1>
+          <h1 className="title">{isEditClick ? "Edit Post" : "Create Post"}</h1>
         </div>
         <form>
           <div className="form-container">
             <div className="form-group-1">
               <div className="d-flex">
-                <img className="avatar" src={user.avatar} alt="avatar" />
+                <img className="avatar" src={currentUser.avatar} alt="avatar" />
                 <input
                   type="text"
                   className="form-control shadow-none"
@@ -90,30 +93,23 @@ function CreatePost({ value, docId, setIsEditClick }) {
                   onChange={(event) => setText(event.target.value)}
                 />
               </div>
-              {image ? (
+              {(image || editPhoto) && (
                 <div className="file-container">
                   <button
                     type="button"
                     className="btn-close"
                     aria-label="Close"
-                    onClick={() => setImage(null)}
+                    onClick={() => {
+                      setImage(null);
+                      setEditPhoto(null);
+                    }}
                   ></button>
                   <img
                     className="selected-file"
-                    src={URL.createObjectURL(image)}
+                    src={editPhoto ? editPhoto : URL.createObjectURL(image)}
                     alt="selected-file"
                   />
                 </div>
-              ) : (
-                editPhoto && (
-                  <div className="file-container">
-                    <img
-                      className="selected-file"
-                      src={editPhoto}
-                      alt="selected-file"
-                    />
-                  </div>
-                )
               )}
             </div>
             <ul className="form-group form-group-2 photo-emojis-btn-container">
@@ -136,10 +132,14 @@ function CreatePost({ value, docId, setIsEditClick }) {
               </li>
             </ul>
             {emojiClick && (
-              <EmojiBox setEmojiClick={setEmojiClick} setText={setText} />
+              <EmojiBox
+                setEmojiClick={setEmojiClick}
+                text={text}
+                setText={setText}
+              />
             )}
           </div>
-          {editText || editPhoto ? (
+          {isEditClick ? (
             <button
               type="button"
               className="post-btn col-11"

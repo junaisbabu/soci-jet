@@ -1,12 +1,8 @@
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import ListGroup from "react-bootstrap/ListGroup";
 import CreatePost from "../create post/CreatePost";
 
 export default function UpdatedPost(props) {
-  const value = props.value;
-  const docId = props.docId;
-  const setIsEditClick = props.setIsEditClick;
+  const {value, docId, isEditClick, setIsEditClick, setIsDotClicked} = props;
 
   return (
     <Modal
@@ -20,7 +16,9 @@ export default function UpdatedPost(props) {
         <CreatePost
           value={value}
           docId={docId}
+          isEditClick={isEditClick}
           setIsEditClick={setIsEditClick}
+          setIsDotClicked={setIsDotClicked}
         />
       </div>
     </Modal>

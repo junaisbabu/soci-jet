@@ -1,5 +1,5 @@
 import React from "react";
-import FollowersFollowing from "../modal/FollowersFollowing";
+// import FollowersFollowing from "../modal/FollowersFollowing";
 
 function Followers({ modalShow, setModalShow }) {
   return (
