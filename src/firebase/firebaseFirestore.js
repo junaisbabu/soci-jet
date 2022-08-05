@@ -11,6 +11,7 @@ import {
   serverTimestamp,
   query,
   orderBy,
+  onSnapshot
 } from "firebase/firestore";
 
 const postCollectionRef = collection(db, "posts");

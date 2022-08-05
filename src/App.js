@@ -2,12 +2,12 @@ import "./App.css";
 import AppRoutes from "./app routes/AppRoutes";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../src/firebase/firebaseConfig";
+import { auth, db } from "../src/firebase/firebaseConfig";
 import { onAuth } from "../src/redux/actions/Actions";
 import { createContext, useEffect, useState } from "react";
-import firestoreSevice from "./firebase/firebaseFirestore";
 import useLocalStorage from "use-local-storage";
 import Spinner from "./components/loading spinner/Spinner";
+import { doc, onSnapshot } from "firebase/firestore";
 
 export const ThemeContext = createContext();
 export const LoadingContext = createContext();
@@ -18,23 +18,23 @@ function App() {
   const [theme, setTheme] = useLocalStorage("theme" ? "dark" : "light");
   const [load, setLoad] = useState(false);
 
+  const getLoggedUser = async (collection, docId) => {
+    const unsub = await onSnapshot(doc(db, collection, docId), (doc) => {
+      dispatch(onAuth(doc.data()));
+    });
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (auth.currentUser) {
-        const docSnap = await firestoreSevice.getDocument(
-          "users",
-          currentUser.uid
-        );
-        const currentUserData = docSnap.data();
-
-        dispatch(onAuth(currentUserData));
+        getLoggedUser("users", currentUser.uid);
       }
     });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  });
 
   setTimeout(() => {
     setTime(false);

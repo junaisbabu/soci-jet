@@ -1,19 +1,20 @@
 :root {
   --first-color: #0b1829;
   --second-color: #51b5ff;
-  --third-color: linear-gradient(#27ef9f, #0db8de);
+  --third-color: linear-gradient(to right, #27ef9f, #0db8de);
   --body-color: #1b233e;
   --card-color: #1e293b;
   --text-color: #ffffff;
   --photo-emojis-btn-color: #0b1829;
   --date-icon-color: #676d8e;
   --post-btn-color: #fafafa;
+  --hover-btn-color: linear-gradient(to left, #27ef9f, #0db8de)
 }
 
 [data-theme="light"] {
   --first-color: #ffffff;
   --second-color: #51b5ff;
-  --third-color: linear-gradient(#27ef9f, #0db8de);
+  --third-color: linear-gradient(to right, #27ef9f, #0db8de);
   --body-color: #f8f9fa;
   --card-color: #ffffff;
   --text-color: black;

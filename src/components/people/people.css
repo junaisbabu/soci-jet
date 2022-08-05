@@ -90,3 +90,7 @@
   bottom: 10px;
   cursor: pointer;
 }
+
+.people-container .card-footer .follow-btn:hover {
+  background: var(--hover-btn-color);
+}

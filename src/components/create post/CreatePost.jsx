@@ -22,7 +22,7 @@ function CreatePost({
   const editText = value.text;
   const editFile = value.file;
 
-  const [text, setText] = useState(editText);
+  const [text, setText] = useState(isEditClick ? editText : "");
   const [image, setImage] = useState(null);
   const [editPhoto, setEditPhoto] = useState(editFile);
 

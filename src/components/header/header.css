@@ -4,6 +4,13 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
 
+.rocket-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 0 5px;
+}
 
 .navbar .navbar-nav {
   color: var(--second-color);
@@ -11,8 +18,8 @@
   align-items: center;
 }
 
-
-.link, li {
+.link,
+li {
   margin: 0;
   padding: 0;
   color: var(--second-color);
@@ -34,17 +41,16 @@
   font-size: 30px;
   font-weight: 600;
   cursor: pointer;
+  margin-left: 10px;
 }
 
-
-.navbar-brand > i {
+/* .navbar-brand > i {
   font-size: 40px;
   background: var(--third-color);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-}
-
+} */
 
 .nav-item > * {
   font-size: 20px;
@@ -63,7 +69,6 @@
   object-fit: cover;
   margin: 0 5px;
 }
-
 
 @media screen and (max-width: 450px) {
   .navbar-brand .soci-jet {

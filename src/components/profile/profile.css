@@ -53,3 +53,7 @@
 .profile-container .website-link {
   color: var(--second-color);
 }
+
+.clickable {
+  cursor: pointer;
+}

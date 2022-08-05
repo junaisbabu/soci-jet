@@ -105,15 +105,23 @@ function ProfileComponent({ user, setUser, currentUser }) {
             </div>
             <span>@{user.username}</span>
             <p>{user.bio}</p>
-            <Link to={`/${user.link}`} className="website-link">
+            <a href={`${user.link}`} className="website-link">
               {user.link}
-            </Link>
+            </a>
 
             <div className="counter-container my-1">
-              <span>{postCount} posts</span>
-              <span onClick={() => setFollowersModal(true)}>2 followers</span>
+              <span className="clickable">{postCount} posts</span>
+              <span
+                className="clickable"
+                onClick={() => setFollowersModal(true)}
+              >
+                2 followers
+              </span>
 
-              <span onClick={() => setFollowingModal(true)}>
+              <span
+                className="clickable"
+                onClick={() => setFollowingModal(true)}
+              >
                 {follow && followingUsers ? followingUsers.length : 0} following
               </span>
             </div>

@@ -9,7 +9,7 @@ const bookmarks = [];
 function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
 
   const currentUser = useSelector((state) => state.loggedUser.currentUser);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState();
   const [isEditClick, setIsEditClick] = useState(false);
 
   const deleteHandler = async (docId) => {

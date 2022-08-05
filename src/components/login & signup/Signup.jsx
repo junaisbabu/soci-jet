@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { signUp } from "../../firebase/firebaseAuth";
 import "../login & signup/loginSignup.css";
-import { onAuthStateChanged } from "firebase/auth";
-// import { auth } from "../../firebase/firebaseConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { onAuth } from "../../redux/actions/Actions";
+import { auth } from "../../firebase/firebaseConfig";
 import { Link, useNavigate } from "react-router-dom";
 import firestoreSevice from "../../firebase/firebaseFirestore";
-import { getAuth, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import Nav from "./Nav";
 
-const auth = getAuth();
-
 function Signup() {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [err, setErr] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
 
   const navigate = useNavigate();
 
@@ -43,11 +38,6 @@ function Signup() {
           link: "",
         };
 
-        await firestoreSevice.updateDocument(
-          "currentUser",
-          "0RPIcmA7A3sF0flPTswX",
-          userData
-        );
         await firestoreSevice.setDocument("users", result.user.uid, userData);
       });
 
@@ -72,20 +62,20 @@ function Signup() {
             <div className="col-lg-12 login-form">
               <form onSubmit={handleSignUp}>
                 <div className="row">
-                  <div class="form-group col-6">
-                    <label class="form-control-label">Full Name</label>
+                  <div className="form-group col-6">
+                    <label className="form-control-label">Full Name</label>
                     <input
                       type="text"
-                      class="form-control shadow-none"
+                      className="form-control shadow-none"
                       required
                       onChange={(event) => setFirstName(event.target.value)}
                     />
                   </div>
-                  <div class="form-group col-6">
-                    <label class="form-control-label">Last Name</label>
+                  <div className="form-group col-6">
+                    <label className="form-control-label">Last Name</label>
                     <input
                       type="text"
-                      class="form-control shadow-none"
+                      className="form-control shadow-none"
                       onChange={(event) => setLastName(event.target.value)}
                     />
                   </div>
@@ -105,6 +95,7 @@ function Signup() {
                   <input
                     type="password"
                     className="form-control shadow-none"
+                    minLength="6"
                     required
                     onChange={(event) => setPassword(event.target.value)}
                   />

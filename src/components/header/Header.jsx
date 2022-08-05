@@ -8,6 +8,7 @@ import { FiSearch } from "react-icons/fi";
 import { TbBrightnessUp, TbMoon } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Rocket from '../../images/brand/rocket.gif'
 
 function Header() {
   const user = useSelector((state) => state.loggedUser.currentUser);
@@ -28,7 +29,8 @@ function Header() {
       <nav className="navbar sticky-top">
         <div className="container-fluid">
           <span className="navbar-brand mb-0 " onClick={navigateHome}>
-            <i className="bi bi-yelp"></i>{" "}
+            {/* <i className="bi bi-yelp"></i> */}
+            <img className="rocket-logo" src={Rocket} alt='rocket' />
             <h2 className="soci-jet m-0">SociJet</h2>
           </span>
 

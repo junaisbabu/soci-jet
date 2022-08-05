@@ -2,10 +2,9 @@
   background-color: var(--body-color);
   min-height: 100vh;
   max-height: auto;
-  transition: all .5s;
+  transition: all 0.5s;
   padding-bottom: 30px;
 }
-
 
 .spinner-body {
   position: fixed;
