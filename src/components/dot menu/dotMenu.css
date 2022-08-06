@@ -1,11 +1,12 @@
-.dotMenu-container > .card {
+.dotMenu-container .card {
   position: absolute;
   top: 50px;
   right: 3%;
-  background: var(--dotMenu-color);
   padding: 0px;
   width: 150px;
   z-index: 2;
+  background-color: var(--dotMenu-color) !important;
+  border: none;
 }
 
 .dotMenu-container .overlay {
