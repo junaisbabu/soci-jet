@@ -24,6 +24,12 @@
   padding: 8px;
   color: var(--date-icon-color);
   border: none;
+  font-weight: 600;
+
+}
+
+.dotMenu-container .btn, .dotMenu-container .bi {
+  font-weight: 600;
 }
 
 .dotMenu-container .btn:hover {
