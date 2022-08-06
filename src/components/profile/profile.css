@@ -10,6 +10,12 @@
   color: var(--text-color);
 }
 
+.profile-container .card-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .profile-container .sec-left {
   display: grid;
   place-content: center;
@@ -40,9 +46,13 @@
   margin-left: 10px;
 }
 
-.profile-container .counter-container span {
-  margin-right: 15px;
+.profile-container .counter-container .clickable {
   font-weight: 500;
+}
+
+.profile-container .counter-container .posts,
+.followers {
+  margin-right: 15px;
 }
 
 .profile-container .logout-btn {
@@ -56,4 +66,15 @@
 
 .clickable {
   cursor: pointer;
+}
+
+@media screen and (max-width: 465px) {
+  .profile-container .card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-container .sec-left {
+    margin-bottom: 10px;
+  }
 }

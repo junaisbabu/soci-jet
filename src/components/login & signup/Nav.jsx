@@ -1,4 +1,5 @@
 import React from "react";
+import Rocket from "../../images/brand/rocket.gif";
 
 function Nav() {
   return (
@@ -8,7 +9,8 @@ function Nav() {
     >
       <div className="container-fluid">
         <span className="navbar-brand mx-auto mb-0 h1 ">
-          <i className="bi bi-yelp"></i> SociJet
+          <img className="rocket-logo" src={Rocket} alt="rocket" />
+          SociJet
         </span>
       </div>
     </nav>

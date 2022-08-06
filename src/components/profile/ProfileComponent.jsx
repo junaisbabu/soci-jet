@@ -80,7 +80,7 @@ function ProfileComponent({ user, setUser, currentUser }) {
         />
       )}
       <div className="card">
-        <div className="card-body d-flex justify-content-around">
+        <div className="card-body">
           <section className="sec-left">
             <img src={user.avatar} alt={user.name} />
           </section>
@@ -110,9 +110,9 @@ function ProfileComponent({ user, setUser, currentUser }) {
             </a>
 
             <div className="counter-container my-1">
-              <span className="clickable">{postCount} posts</span>
+              <span className="clickable posts">{postCount} posts</span>
               <span
-                className="clickable"
+                className="clickable followers"
                 onClick={() => setFollowersModal(true)}
               >
                 2 followers
