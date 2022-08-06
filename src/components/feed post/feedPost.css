@@ -37,6 +37,7 @@
 
 .feedPost-container .sec-left {
   display: flex;
+  align-items: center;
 }
 
 .feedPost-container .name-date-container .name {
