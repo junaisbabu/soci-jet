@@ -28,7 +28,7 @@ function Post({ post, styles }) {
   return (
     <>
       <div key={post.docId} className="row">
-        <div className="card" style={styles} >
+        <div className="card" style={styles}>
           <div className="card-header">
             <section
               className="sec-left"
@@ -73,7 +73,7 @@ function Post({ post, styles }) {
             <FaRegComment className="icon" onClick={handleComment} />
             <BiShareAlt className="icon" />
           </div>
-          <div className="line" ></div>
+          <div className="line"></div>
         </div>
       </div>
     </>

@@ -21,7 +21,7 @@ function Bookmarks({ currentUserId, styles }) {
     <div className="feedPost-container">
       {bookmark &&
         bookmark.map((post) => {
-          return <Post post={post} styles={styles} />;
+          return <Post key={post.docId} post={post} styles={styles} />;
         })}
     </div>
   );

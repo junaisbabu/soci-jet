@@ -1,8 +1,8 @@
-.dotMenu-container .card {
+.dotMenu-container > .card {
   position: absolute;
   top: 50px;
   right: 3%;
-  background-color: var(--first-color);
+  background: var(--dotMenu-color);
   padding: 0px;
   width: 150px;
   z-index: 2;
@@ -26,7 +26,7 @@
 }
 
 .dotMenu-container .btn:hover {
-  color: var(--second-color);
+  color: blue;
 }
 
 .dotMenu-container .btn-deletePost:hover {

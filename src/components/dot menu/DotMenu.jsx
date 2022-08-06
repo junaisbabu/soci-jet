@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dotMenu.css";
 import firestoreSevice from "../../firebase/firebaseFirestore";
 import { useSelector } from "react-redux";
 import UpdatedPost from "../modal/UpdatePost";
 
-const bookmarks = [];
-
 function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
-
   const currentUser = useSelector((state) => state.loggedUser.currentUser);
+  const bookmarks = useSelector((state) => state.bookmarks);
+  const [bookmarked, setBookmarked] = useState([]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
   const [value, setValue] = useState();
   const [isEditClick, setIsEditClick] = useState(false);
+
+  useEffect(() => {
+    if (bookmarks) {
+      const bookmarked = getBookmarks(docId);
+
+      setIsBookmarked(bookmarked);
+    }
+  }, []);
+
+  const getBookmarks = (docId) => {
+    const current = bookmarks.filter((item) => {
+      return item.docId === currentUser.id;
+    });
+
+    setBookmarked(current[0].bookmarks);
+    const isBookmarked = current[0].bookmarks.some((obj) => {
+      return obj.docId === docId;
+    });
+
+    return isBookmarked;
+  };
 
   const deleteHandler = async (docId) => {
     await firestoreSevice.deleteDocument("posts", docId);
@@ -23,14 +45,24 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
     setIsEditClick(true);
   };
 
-  const handleBookmark = async (post) => {
+  const handleBookmark = async (post, textContent) => {
     setIsDotClicked(false);
-    if (!bookmarks.includes(post)) {
-      bookmarks.push(post);
+    if (textContent.includes("Save post")) {
+      bookmarked.push(post);
+      console.log(bookmarked);
+
+      await firestoreSevice.setDocument("bookmarks", currentUser.id, {
+        bookmarks: bookmarked,
+      });
+    } else {
+      const removedBookmark = bookmarked.filter((item) => {
+        return item.docId !== post.docId;
+      });
+
+      await firestoreSevice.setDocument("bookmarks", currentUser.id, {
+        bookmarks: removedBookmark,
+      });
     }
-    await firestoreSevice.setDocument("bookmarks", currentUser.id, {
-      bookmarks,
-    });
   };
 
   return (
@@ -59,10 +91,19 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
           ></div>
           <div className="card p-1">
             <button
-              className="btn btn-savePost btn-sm "
-              onClick={() => handleBookmark(post)}
+              className={
+                isBookmarked
+                  ? "btn btn-deletePost btn-sm"
+                  : "btn btn-savePost btn-sm "
+              }
+              onClick={(e) => handleBookmark(post, e.target.textContent)}
             >
-              <i className="bi bi-bookmark"></i> Save post
+              {isBookmarked ? (
+                <i className="bi bi-trash"></i>
+              ) : (
+                <i className="bi bi-bookmark"></i>
+              )}{" "}
+              {isBookmarked ? "Romove saved" : "Save post"}
             </button>
             {currentUser.id === post.userId && (
               <>

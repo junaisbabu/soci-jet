@@ -8,7 +8,8 @@
   --photo-emojis-btn-color: #0b1829;
   --date-icon-color: #676d8e;
   --post-btn-color: #fafafa;
-  --hover-btn-color: linear-gradient(to left, #27ef9f, #0db8de)
+  --hover-btn-color: linear-gradient(to left, #27ef9f, #0db8de);
+  --dotMenu-color: #0b1829;
 }
 
 [data-theme="light"] {
@@ -21,6 +22,7 @@
   --photo-emojis-btn-color: #dcf0ff;
   --date-icon-color: #7f8c9f;
   --post-btn-color: #dddddd;
+  --dotMenu-color: #DCF0FF;
 }
 
 body {
