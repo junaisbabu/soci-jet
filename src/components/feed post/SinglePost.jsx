@@ -6,9 +6,13 @@ import Header from "../header/Header";
 import "./feedPost.css";
 import CommentBox from "../comment box/CommentBox";
 import Loading from "../loading spinner/Loading";
+import { useSelector } from "react-redux";
 
 function SinglePost() {
   const [post, setPost] = useState();
+  const currentUser = useSelector((state) => state.loggedUser.currentUser);
+  const { id } = currentUser;
+  const [likeDislike, setLikeDislike] = useState(false);
 
   const { postid } = useParams();
 
@@ -19,7 +23,7 @@ function SinglePost() {
 
   useEffect(() => {
     fetchPost();
-  }, []);
+  }, [likeDislike]);
 
   const border = {
     border: "none",
@@ -40,7 +44,7 @@ function SinglePost() {
           style={styles}
         >
           <div>
-            <Post post={post} styles={border} />
+            <Post post={post} styles={border} userId={id} likeDislike={likeDislike} setLikeDislike={setLikeDislike} />
             <CommentBox post={post} styles={{ border }} />
           </div>
         </div>

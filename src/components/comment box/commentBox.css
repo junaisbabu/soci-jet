@@ -62,10 +62,16 @@
   color: var(--date-icon-color);
 }
 
-.commentBox-container .enter-comment {
+.commentBox-container .form-control {
   background-color: var(--body-color);
   outline: none;
   border: 1px solid var(--date-icon-color);
+}
+
+.commentBox-container .form-control:focus {
+  padding: 5px 10px;
+  background-color: var(--body-color);
+  color: var(--text-color);
 }
 
 .commentBox-container .input-group .btn {

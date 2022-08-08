@@ -26,12 +26,14 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
       return item.docId === currentUser.id;
     });
 
-    setBookmarked(current[0].bookmarks);
-    const isBookmarked = current[0].bookmarks.some((obj) => {
-      return obj.docId === docId;
-    });
+    if (current.length > 0) {
+      setBookmarked(current[0].bookmarks);
+      const isBookmarked = current[0].bookmarks.some((obj) => {
+        return obj.docId === docId;
+      });
 
-    return isBookmarked;
+      return isBookmarked;
+    }
   };
 
   const deleteHandler = async (docId) => {

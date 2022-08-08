@@ -92,5 +92,23 @@
 }
 
 .feedPost-container .card-footer > * {
+  display: block;
   color: var(--date-icon-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feedPost-container .like-body {
+  display: flex;
+  align-items: center;
+}
+
+.feedPost-container .like-body > span {
+  display: block;
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.feedPost-container .like-body > .icon {
+  margin-right: 5px;
 }

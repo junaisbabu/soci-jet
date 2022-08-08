@@ -36,7 +36,7 @@ function CommentBox({ styles, post }) {
         <div className="input-group mb-3">
           <input
             type="text"
-            className="form-control enter-comment shadow-none"
+            className="form-control shadow-none"
             placeholder="Enter your comment"
             aria-label="Enter your comment"
             aria-describedby="button-addon2"

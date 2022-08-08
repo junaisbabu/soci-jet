@@ -12,11 +12,70 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { BiShareAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import firestoreSevice from "../../firebase/firebaseFirestore";
 
-function Post({ post, styles }) {
+function Post({ post, styles, userId, likeDislike, setLikeDislike }) {
   const navigate = useNavigate();
   const [isDotClicked, setIsDotClicked] = useState(0);
   const [deleted, setDeleted] = useState("");
+
+  const { likes, dislikes } = post;
+
+  const handleLike = async (docId) => {
+    let likesArr = [];
+    if (likes) {
+      likesArr = likes.slice();
+      likesArr.push(userId);
+    } else {
+      likesArr.push(userId);
+    }
+
+    await firestoreSevice.updateDocument("posts", docId, {
+      likes: likesArr,
+    });
+
+    if (dislikes) {
+      const copyArr = dislikes.slice();
+      let elIndex = copyArr.indexOf(userId);
+      if (elIndex !== -1) {
+        copyArr.splice(elIndex, 1);
+
+        firestoreSevice.updateDocument("posts", docId, {
+          dislikes: copyArr,
+        });
+      }
+    }
+
+    if (likeDislike !== undefined) setLikeDislike(!likeDislike);
+  };
+
+  const handleDislike = async (docId) => {
+    let dislikesArr = [];
+    if (dislikes) {
+      dislikesArr = dislikes.slice();
+      dislikesArr.push(userId);
+    } else {
+      dislikesArr.push(userId);
+    }
+
+    await firestoreSevice.updateDocument("posts", docId, {
+      dislikes: dislikesArr,
+    });
+
+    if (likes) {
+      const copyArr = likes.slice();
+      let elIndex = copyArr.indexOf(userId);
+      if (elIndex !== -1) {
+        copyArr.splice(elIndex, 1);
+
+        firestoreSevice.updateDocument("posts", docId, {
+          likes: copyArr,
+        });
+      }
+    }
+
+    if (likeDislike !== undefined) setLikeDislike(!likeDislike);
+  };
 
   const handleComment = () => {
     navigate(`/post/${post.docId}`);
@@ -65,10 +124,41 @@ function Post({ post, styles }) {
             {post.file && <img src={post.file} alt={post.text} />}
           </div>
           <div className="card-footer">
-            <AiOutlineLike className="icon" />
-            {/* <AiFillLike className="icon" /> */}
-            <AiOutlineDislike className="icon" />
-            {/* <AiFillDislike className="icon" /> */}
+            <div className="like-body">
+              {likes ? (
+                likes.includes(userId) ? (
+                  <AiFillLike className="icon" />
+                ) : (
+                  <AiOutlineLike
+                    className="icon"
+                    onClick={() => handleLike(post.docId)}
+                  />
+                )
+              ) : (
+                <AiOutlineLike
+                  className="icon"
+                  onClick={() => handleLike(post.docId)}
+                />
+              )}
+
+              <span>{likes ? likes.length : 0}</span>
+            </div>
+
+            {dislikes ? (
+              dislikes.includes(userId) ? (
+                <AiFillDislike className="icon" />
+              ) : (
+                <AiOutlineDislike
+                  className="icon"
+                  onClick={() => handleDislike(post.docId)}
+                />
+              )
+            ) : (
+              <AiOutlineDislike
+                className="icon"
+                onClick={() => handleDislike(post.docId)}
+              />
+            )}
 
             <FaRegComment className="icon" onClick={handleComment} />
             <BiShareAlt className="icon" />
