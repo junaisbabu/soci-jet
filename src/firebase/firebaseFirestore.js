@@ -11,18 +11,20 @@ import {
   serverTimestamp,
   query,
   orderBy,
-  onSnapshot
+  onSnapshot,
 } from "firebase/firestore";
 
 const postCollectionRef = collection(db, "posts");
 
 class firestoreSevice {
-  addDocument = (collectionName, data) => {
+  addDocument = async (collectionName, data) => {
     const collectionRef = collection(db, `${collectionName}`);
-    return addDoc(collectionRef, {
+    const docRef = await addDoc(collectionRef, {
       ...data,
       timestamp: serverTimestamp(),
     });
+
+    updateDoc(docRef, { docId: docRef.id });
   };
 
   setDocument = async (collectionRef, userId, data) => {
@@ -52,7 +54,6 @@ class firestoreSevice {
 
   // Get all Posts When Add new post
   getPostsQuery = async () => {
-
     const q = await query(postCollectionRef, orderBy("timestamp", "desc"));
 
     return q;
@@ -63,8 +64,7 @@ class firestoreSevice {
     const q = await query(collectionRef);
 
     return q;
-  }
-
+  };
 }
 
 export default new firestoreSevice();
