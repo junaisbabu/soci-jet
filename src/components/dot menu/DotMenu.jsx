@@ -3,6 +3,7 @@ import "./dotMenu.css";
 import firestoreSevice from "../../firebase/firebaseFirestore";
 import { useSelector } from "react-redux";
 import UpdatedPost from "../modal/UpdatePost";
+import {useNavigate} from 'react-router-dom'
 
 function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
   const currentUser = useSelector((state) => state.loggedUser.currentUser);
@@ -12,6 +13,7 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
 
   const [value, setValue] = useState();
   const [isEditClick, setIsEditClick] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (bookmarks) {
@@ -38,6 +40,7 @@ function DotMenu({ docId, isDotClicked, setIsDotClicked, post }) {
 
   const deleteHandler = async (docId) => {
     await firestoreSevice.deleteDocument("posts", docId);
+    navigate('/');
   };
 
   const handleEdit = async (docId) => {

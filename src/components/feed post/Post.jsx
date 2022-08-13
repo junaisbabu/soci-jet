@@ -13,6 +13,7 @@ import { FaRegComment } from "react-icons/fa";
 import { BiShareAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import firestoreSevice from "../../firebase/firebaseFirestore";
+import { arrayRemove, arrayUnion } from "firebase/firestore";
 
 function Post({ post, styles, userId, likeDislike, setLikeDislike }) {
   const navigate = useNavigate();
@@ -22,57 +23,77 @@ function Post({ post, styles, userId, likeDislike, setLikeDislike }) {
   const { likes, dislikes } = post;
 
   const handleLike = async (docId) => {
-    let likesArr = [];
-    if (likes) {
-      likesArr = likes.slice();
-      likesArr.push(userId);
-    } else {
-      likesArr.push(userId);
+    // let likesArr = [];
+    // if (likes) {
+    //   likesArr = likes.slice();
+    //   likesArr.push(userId);
+    // } else {
+    //   likesArr.push(userId);
+    // }
+
+    // await firestoreSevice.updateDocument("posts", docId, {
+    //   likes: likesArr,
+    // });
+
+    // if (dislikes) {
+    //   const copyArr = dislikes.slice();
+    //   let elIndex = copyArr.indexOf(userId);
+    //   if (elIndex !== -1) {
+    //     copyArr.splice(elIndex, 1);
+
+    //     firestoreSevice.updateDocument("posts", docId, {
+    //       dislikes: copyArr,
+    //     });
+    //   }
+    // }
+
+    if (dislikes?.includes(userId)) {
+      await firestoreSevice.updateDocument("posts", docId, {
+        dislikes: arrayRemove(userId),
+      });
     }
 
     await firestoreSevice.updateDocument("posts", docId, {
-      likes: likesArr,
+      likes: arrayUnion(userId),
     });
-
-    if (dislikes) {
-      const copyArr = dislikes.slice();
-      let elIndex = copyArr.indexOf(userId);
-      if (elIndex !== -1) {
-        copyArr.splice(elIndex, 1);
-
-        firestoreSevice.updateDocument("posts", docId, {
-          dislikes: copyArr,
-        });
-      }
-    }
 
     if (likeDislike !== undefined) setLikeDislike(!likeDislike);
   };
 
   const handleDislike = async (docId) => {
-    let dislikesArr = [];
-    if (dislikes) {
-      dislikesArr = dislikes.slice();
-      dislikesArr.push(userId);
-    } else {
-      dislikesArr.push(userId);
+    // let dislikesArr = [];
+    // if (dislikes) {
+    //   dislikesArr = dislikes.slice();
+    //   dislikesArr.push(userId);
+    // } else {
+    //   dislikesArr.push(userId);
+    // }
+
+    // await firestoreSevice.updateDocument("posts", docId, {
+    //   dislikes: dislikesArr,
+    // });
+
+    // if (likes) {
+    //   const copyArr = likes.slice();
+    //   let elIndex = copyArr.indexOf(userId);
+    //   if (elIndex !== -1) {
+    //     copyArr.splice(elIndex, 1);
+
+    //     firestoreSevice.updateDocument("posts", docId, {
+    //       likes: copyArr,
+    //     });
+    //   }
+    // }
+
+    if (likes?.includes(userId)) {
+      await firestoreSevice.updateDocument("posts", docId, {
+        likes: arrayRemove(userId),
+      });
     }
 
     await firestoreSevice.updateDocument("posts", docId, {
-      dislikes: dislikesArr,
+      dislikes: arrayUnion(userId),
     });
-
-    if (likes) {
-      const copyArr = likes.slice();
-      let elIndex = copyArr.indexOf(userId);
-      if (elIndex !== -1) {
-        copyArr.splice(elIndex, 1);
-
-        firestoreSevice.updateDocument("posts", docId, {
-          likes: copyArr,
-        });
-      }
-    }
 
     if (likeDislike !== undefined) setLikeDislike(!likeDislike);
   };

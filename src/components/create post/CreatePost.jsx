@@ -45,9 +45,9 @@ function CreatePost({
     };
     await firestoreSevice.addDocument("posts", newPost);
 
+    setLoad(false);
     setImage(null);
     setText("");
-    setLoad(false);
   };
 
   const handleUpdatePost = async () => {

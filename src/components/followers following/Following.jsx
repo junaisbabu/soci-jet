@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import firestoreSevice from "../../firebase/firebaseFirestore";
 import FollowersFollowing from "../modal/FollowersFollowing";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 function Following({ followingUsers, modalShow, setModalShow }) {
   return (
@@ -11,6 +7,7 @@ function Following({ followingUsers, modalShow, setModalShow }) {
         <FollowersFollowing
           data={followingUsers}
           title={"Following Users"}
+          setModalShow={setModalShow}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

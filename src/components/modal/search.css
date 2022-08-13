@@ -1,0 +1,47 @@
+.search-body .form-control {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.search-body .list-group {
+  text-align: left;
+  min-height: auto;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.search-body .list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+  border: none;
+  margin: 2px 0;
+}
+
+.list-group-item .avatar {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0px 20px;
+}
+
+.list-group-item .name {
+  display: inline;
+  font-size: large;
+  font-weight: 600;
+}
+
+.searchBar-modal .list-group::-webkit-scrollbar {
+  width: 7px;
+}
+
+.searchBar-modal .list-group::-webkit-scrollbar-track {
+  display: none;
+}
+
+.searchBar-modal .list-group::-webkit-scrollbar-thumb {
+  background: var(--second-color);
+  border-radius: 15px;
+}

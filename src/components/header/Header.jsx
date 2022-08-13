@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./header.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,9 +8,12 @@ import { FiSearch } from "react-icons/fi";
 import { TbBrightnessUp, TbMoon } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import Rocket from '../../images/brand/rocket.gif'
+import Rocket from "../../images/brand/rocket.gif";
+import Search from "../modal/Search";
 
 function Header() {
+  const [searchClick, setSearchClick] = useState(false);
+
   const user = useSelector((state) => state.loggedUser.currentUser);
   const { theme, setTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
@@ -26,16 +29,20 @@ function Header() {
 
   return (
     <>
+      <Search setSearchClick={setSearchClick} show={searchClick} onHide={() => setSearchClick(false)} />
       <nav className="navbar sticky-top">
         <div className="container-fluid">
           <span className="navbar-brand mb-0 " onClick={navigateHome}>
             {/* <i className="bi bi-yelp"></i> */}
-            <img className="rocket-logo" src={Rocket} alt='rocket' />
+            <img className="rocket-logo" src={Rocket} alt="rocket" />
             <h2 className="soci-jet m-0">SociJet</h2>
           </span>
 
           <ul className="navbar-nav">
-            <li className="nav-item">
+            <li
+              className="nav-item"
+              onClick={() => setSearchClick(!searchClick)}
+            >
               <FiSearch className="icon" />
             </li>
             <li className="nav-item" onClick={changeTheme}>

@@ -1,10 +1,17 @@
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useNavigate } from "react-router-dom";
 import "./followersFollowing.css";
 
 export default function FollowersFollowing(props) {
   const data = props.data;
+
+  const navigate = useNavigate();
+
+  const navigateProfile = (userId) => {
+    navigate(`/profile/${userId}`);
+    props.setModalShow(false);
+  };
 
   return (
     <Modal
@@ -24,7 +31,13 @@ export default function FollowersFollowing(props) {
           {data &&
             data.map((user) => {
               return (
-                <ListGroup.Item key={user.id} className="list-item">
+                <ListGroup.Item
+                  key={user.id}
+                  className="list-item"
+                  onClick={() => {
+                    navigateProfile(user.id);
+                  }}
+                >
                   <img className="avatar" src={user.avatar} alt={user.name} />
                   <h4 className="name">{user.name}</h4>
                 </ListGroup.Item>

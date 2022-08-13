@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userSignOut } from "../../firebase/firebaseAuth";
 import EditProfile from "../modal/EditProfile";
 import Followers from "../followers following/Followers";
