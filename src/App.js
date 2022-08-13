@@ -6,7 +6,6 @@ import { auth, db } from "../src/firebase/firebaseConfig";
 import { onAuth } from "../src/redux/actions/Actions";
 import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "use-local-storage";
-import Spinner from "./components/loading spinner/Spinner";
 import { doc, onSnapshot } from "firebase/firestore";
 
 export const ThemeContext = createContext();
@@ -14,7 +13,6 @@ export const LoadingContext = createContext();
 
 function App() {
   const dispatch = useDispatch();
-  const [time, setTime] = useState(true);
   const [theme, setTheme] = useLocalStorage("theme" ? "dark" : "light");
   const [load, setLoad] = useState(false);
 
@@ -27,6 +25,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (auth.currentUser) {
+        window.localStorage.setItem("isLoggedIn", true);
         getLoggedUser("users", currentUser.uid);
       }
     });
@@ -36,21 +35,10 @@ function App() {
     };
   });
 
-  setTimeout(() => {
-    setTime(false);
-  }, 3000);
-
   return (
     <div className="app" data-theme={theme}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <LoadingContext.Provider value={{ load, setLoad }}>
-          {time && (
-            <div className="spinner-body">
-              <div className="spinner">
-                <Spinner />
-              </div>
-            </div>
-          )}
           <AppRoutes />
         </LoadingContext.Provider>
       </ThemeContext.Provider>

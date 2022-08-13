@@ -5,13 +5,3 @@
   transition: all 0.5s;
   padding-bottom: 30px;
 }
-
-.spinner-body {
-  position: fixed;
-  z-index: 3;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  background-color: var(--body-color);
-}

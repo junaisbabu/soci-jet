@@ -7,6 +7,7 @@ import Following from "../followers following/Following";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuth } from "../../redux/actions/Actions";
+import { ActionTypes } from "../../redux/constants/actionTypes";
 
 function ProfileComponent({ user, setUser, currentUser }) {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function ProfileComponent({ user, setUser, currentUser }) {
   const [editUser, setEditUser] = useState(false);
 
   const posts = useSelector((state) => state.addedPosts);
+  const users = useSelector((state) => state.addedUsers.users);
 
   const following = useSelector((state) => state.followingUsers);
 
@@ -42,6 +44,7 @@ function ProfileComponent({ user, setUser, currentUser }) {
     try {
       await userSignOut();
       dispatch(onAuth(""));
+      window.localStorage.setItem("isLoggedIn", false);
       navigate("/login");
     } catch (err) {
       console.log("Error: ", err.message);

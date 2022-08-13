@@ -13,11 +13,13 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [load, setLoad] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    setLoad(true);
 
     setErr("");
 
@@ -39,9 +41,9 @@ function Signup() {
         };
 
         await firestoreSevice.setDocument("users", result.user.uid, userData);
+        setLoad(false);
+        navigate("/");
       });
-
-      navigate("/");
     } catch (err) {
       setErr(err.message);
     }
@@ -108,9 +110,16 @@ function Signup() {
                       Sign in
                     </Link>
                   </span>
-                  <button type="submit" className="btn btn-outline">
-                    SIGN UP
-                  </button>
+                  {!load ? (
+                    <button type="submit" className="btn btn-outline">
+                      SIGN UP
+                    </button>
+                  ) : (
+                    <button class="btn btn-outline">
+                      <span class="spinner-border spinner-border-sm"></span>
+                      Loading..
+                    </button>
+                  )}
                 </div>
               </form>
             </div>

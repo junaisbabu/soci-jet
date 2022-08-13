@@ -16,8 +16,6 @@ import PreventBack from "./PreventBack";
 function AppRoutes() {
   const dispatch = useDispatch();
 
-
-
   const queryPeople = async () => {
     const q = await firestoreSevice.getQuery("users");
     const unsub = onSnapshot(q, (snapshot) => {
