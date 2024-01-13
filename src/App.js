@@ -7,11 +7,13 @@ import { onAuth } from "../src/redux/actions/Actions";
 import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "use-local-storage";
 import { doc, onSnapshot } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 export const ThemeContext = createContext();
 export const LoadingContext = createContext();
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [theme, setTheme] = useLocalStorage("theme" ? "dark" : "light");
   const [load, setLoad] = useState(false);
@@ -24,16 +26,18 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (auth.currentUser) {
+      if (currentUser) {
         window.localStorage.setItem("isLoggedIn", true);
         getLoggedUser("users", currentUser.uid);
+      } else {
+        navigate("/login");
       }
     });
 
     return () => {
       unsubscribe();
     };
-  });
+  }, [auth.currentUser]);
 
   return (
     <div className="app" data-theme={theme}>
